@@ -1,0 +1,5 @@
+export const UPLOAD_BASE_URL = process.env.REACT_APP_UPLOAD_BASE_URL
+export const FREEPORT_API_URL = process.env.REACT_APP_FREEPORT_API_URL
+export const NETWORK_ID = process.env.REACT_APP_NETWORK_ID
+export const CONTRACTS_DEPLOYMENT = process.env.REACT_APP_CONTRACTS_DEPLOYMENT
+export const APPLICATION = process.env.REACT_APP_APPLICATION
