@@ -28,8 +28,8 @@ export class NftMinter {
     const signer = await this.connectionManager.getSigner();
     const userPublicKey = await signer?.getAddress();
     const mintedNftAddress = await this.mintNft(userPublicKey!, collectionTitle, qtyToMint)
-    const {cid} = await this.uploadVideContent(title, description, videoFile, videoFilePreview);
-    await this.attachContentToNft(mintedNftAddress, cid);
+    const uploadResponse = await this.uploadVideContent(title, description, videoFile, videoFilePreview);
+    await this.attachContentToNft(mintedNftAddress, JSON.stringify(uploadResponse));
   }
 
   private async mintNft(userPublicKey: string, collectionTitle: string, qtyToMint: number): Promise<string> {
@@ -69,11 +69,11 @@ export class NftMinter {
     });
   }
 
-  private async attachContentToNft(nftAddress: string, cid: string): Promise<void> {
+  private async attachContentToNft(nftAddress: string, jsonContentString: string): Promise<void> {
     const attachmentManager = await this.contractsProvider.getNftAttachmentManager();
     const attachmentTx = await attachmentManager.collectionManagerAttachToNFT(
       nftAddress,
-      this.stringToDataHexString(cid)
+      this.stringToDataHexString(jsonContentString)
     )
     await attachmentTx.wait()
   }
