@@ -6,7 +6,7 @@ export class DDCBucketManager implements IBucketManager {
   }
 
   async createBucket(size: bigint = 1n, balance: bigint = 10n): Promise<bigint> {
-    const {bucketId} = await this.ddcClient.createBucket(balance, size, this.storageClusterId);
+    const {bucketId} = await this.ddcClient.createBucket(balance, size, this.storageClusterId, {replication: 1});
     return bucketId;
   }
 
