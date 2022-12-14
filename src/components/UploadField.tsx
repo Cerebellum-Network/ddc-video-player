@@ -6,9 +6,10 @@ export type UploadFiledProps = {
   name: string;
   placeholder?: string;
   disabled?: boolean;
+  accept?: string;
 }
 
-export const UploadField = ({name, placeholder, disabled}: UploadFiledProps) => {
+export const UploadField = ({name, placeholder, disabled, accept}: UploadFiledProps) => {
   return (
     <Box sx={{
       width: '100%',
@@ -20,8 +21,11 @@ export const UploadField = ({name, placeholder, disabled}: UploadFiledProps) => 
       alignItems: 'center',
       justifyContent: 'center'
     }}>
-      <input type="file" name={name}
-             style={{opacity: 0, width: '100%', height: '100%', position: 'absolute'}} disabled={disabled}/>
+      <input type="file"
+             name={name}
+             style={{opacity: 0, width: '100%', height: '100%', position: 'absolute'}}
+             accept={accept}
+             disabled={disabled}/>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
         <CloudUploadIcon sx={{width: '40px', height: '40px'}}/>
         <Typography>{placeholder}</Typography>

@@ -24,7 +24,7 @@ export const VideoDetailsPage = () => {
   return (
     <Box>
       <Paper elevation={2} sx={{height: '600px'}}>
-        <video src={`http://localhost:8080/${bucketId}/${cid}`} controls/>
+        <video src={`http://38.54.38.49:8080/${bucketId}/${cid}`} controls/>
       </Paper>
       <Paper elevation={1} sx={{marginTop: '1rem', padding: '1rem'}}>
         <Typography variant="h5" sx={{fontWeight: 600, marginBottom: '.5rem'}}>{fileName}</Typography>

@@ -6,8 +6,11 @@ import {ddcClient} from '../../model'
 import {UploadField} from '../../components/UploadField'
 import CircularProgress from '@mui/material/CircularProgress'
 import {Tag} from '@cere-ddc-sdk/ddc-client'
+import {cidsStorage} from '../../model/storage/CidsStorage'
+import {useNavigate} from 'react-router-dom'
 
 export const VideoUploadPage = () => {
+  const navigate = useNavigate();
   const [processing, setProcessing] = useState<boolean>(false)
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -16,7 +19,7 @@ export const VideoUploadPage = () => {
     const form = new FormData(e.currentTarget)
     const formValues = Object.fromEntries(form.entries())
     const coverCid = await uploader.upload(formValues.videoCover as File, 11n)
-    const videoCid = await uploader.upload(
+    const uploadResult = await uploader.upload(
       formValues.videoFile as File,
       11n,
       [
@@ -25,7 +28,8 @@ export const VideoUploadPage = () => {
         new Tag('coverCid', coverCid.path as string),
       ]
     )
-    console.log(videoCid)
+    cidsStorage.addCid(uploadResult.path as string);
+    navigate(`/video/11/${uploadResult.path}`);
   }
 
   // const createBucket = async () => {
@@ -37,7 +41,7 @@ export const VideoUploadPage = () => {
     <form onSubmit={onSubmit}>
       <Box sx={{display: 'flex', width: '100%', gap: '1rem', justifyContent: 'space-between'}}>
         <Paper elevation={1} sx={{display: 'flex', height: '450px', padding: '1rem', flexGrow: 1}}>
-          <UploadField name="videoFile" placeholder="Click to select a video to upload" disabled={processing}/>
+          <UploadField name="videoFile" placeholder="Click to select a video to upload" disabled={processing} accept=".mp4"/>
         </Paper>
         <Paper elevation={1} sx={{
           display: 'flex',
@@ -51,7 +55,7 @@ export const VideoUploadPage = () => {
           <TextField name="description" label="Description" multiline rows={4}
                      sx={{marginBottom: '1rem', width: '100%'}} disabled={processing}/>
           <Box sx={{width: '100%', height: '150px', marginBottom: '1rem'}}>
-            <UploadField name="videoCover" placeholder="Click to select a cover image to upload" disabled={processing}/>
+            <UploadField name="videoCover" placeholder="Click to select a cover image to upload" accept=".jpeg, .png" disabled={processing}/>
           </Box>
           <Button variant="outlined" type="submit" sx={{width: '145px'}} disabled={processing}>
             {processing ?
