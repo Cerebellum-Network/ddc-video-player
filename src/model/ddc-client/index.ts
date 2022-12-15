@@ -12,8 +12,8 @@ export class AppDdcClient {
     if (!this.client) {
       throw new Error('Error creating DDC client')
     }
-    // await this.client.accountDeposit(10n);
-    // await this.client.smartContract.accountBond(5n);
+    // await this.client.accountDeposit(1n);
+    // await this.client.smartContract.accountBond(1n);
   }
 
   get(): DdcClient {
