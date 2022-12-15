@@ -3,14 +3,14 @@ import {useEffect, useState, MouseEvent} from 'react'
 import {getVideosList, VideoItem} from '../../api'
 import {useNavigate} from 'react-router-dom'
 
-const BUCKET_ID = 11n;
+const BUCKET_ID = BigInt(11);
 
 export const VideosListPage = () => {
   const navigate = useNavigate()
   const [items, setItems] = useState<VideoItem[]>([]);
 
   useEffect(() => {
-    getVideosList(11n).then(itms => setItems(itms))
+    getVideosList(BUCKET_ID).then(itms => setItems(itms))
   }, [])
 
   const handleCardClick = (event: MouseEvent<HTMLLIElement>) => {

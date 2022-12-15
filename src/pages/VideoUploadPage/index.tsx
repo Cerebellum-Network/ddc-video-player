@@ -18,10 +18,10 @@ export const VideoUploadPage = () => {
     const uploader = new DDCUploader(ddcClient.get())
     const form = new FormData(e.currentTarget)
     const formValues = Object.fromEntries(form.entries())
-    const coverCid = await uploader.upload(formValues.videoCover as File, 11n)
+    const coverCid = await uploader.upload(formValues.videoCover as File, BigInt(11))
     const uploadResult = await uploader.upload(
       formValues.videoFile as File,
-      11n,
+      BigInt(11),
       [
         new Tag('title', formValues.title as string),
         new Tag('description', formValues.description as string),
