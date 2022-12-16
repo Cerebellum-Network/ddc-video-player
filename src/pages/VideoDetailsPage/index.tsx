@@ -1,5 +1,7 @@
 import {useParams} from 'react-router-dom'
 import {Box, Paper, Typography} from '@mui/material'
+import { styled } from "@mui/material/styles";
+
 import {useCallback, useEffect, useState} from 'react'
 import {ddcClient} from '../../model'
 import {getTagsFromPiece} from '../../utils'
@@ -26,11 +28,17 @@ export const VideoDetailsPage = () => {
       <Paper elevation={2} sx={{height: '600px'}}>
         <video src={`https://anycast.cdn.devnet.cere.network/${bucketId}/${cid}`} controls/>
       </Paper>
-      <Paper elevation={1} sx={{marginTop: '1rem', padding: '1rem'}}>
+      <InfoPaper elevation={1}>
         <Typography variant="h5" sx={{fontWeight: 600, marginBottom: '.5rem'}}>{fileName}</Typography>
         <Typography sx={{fontWeight: 600}}>Description</Typography>
         <Typography>{fileDescription}</Typography>
-      </Paper>
+      </InfoPaper>
     </Box>
   )
 }
+
+const InfoPaper = styled(Paper)(() => ({
+  marginTop: '1rem',
+  padding: '1rem',
+  borderRadius: '24px'
+}))

@@ -89,6 +89,7 @@ export class NftMinter {
   }
 
   private stringToDataHexString(text: string): BytesLike {
+    // @ts-ignore
     return `0x${[...text].map((char) => char.charCodeAt(0).toString(16)).join('')}`;
   }
 }
