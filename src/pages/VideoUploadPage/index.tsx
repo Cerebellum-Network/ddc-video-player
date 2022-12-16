@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from 'react'
-import {Box, TextField, Paper, Button} from '@mui/material'
+import {Box, TextField, Paper} from '@mui/material'
 import {DDCUploader} from '../../model/ddc-uploader/DDCUploader'
 import {ddcClient} from '../../model'
 // import {DDCBucketManager} from '../../model/bucket/DDCBucketManager'
@@ -8,6 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import {Tag} from '@cere-ddc-sdk/ddc-client'
 import {cidsStorage} from '../../model/storage/CidsStorage'
 import {useNavigate} from 'react-router-dom'
+import {Button} from '../../components'
 
 export const VideoUploadPage = () => {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ export const VideoUploadPage = () => {
           <Box sx={{width: '100%', height: '150px', marginBottom: '1rem'}}>
             <UploadField name="videoCover" placeholder="Click to select a cover image to upload" accept=".jpeg, .png" disabled={processing}/>
           </Box>
-          <Button variant="outlined" type="submit" sx={{width: '145px'}} disabled={processing}>
+          <Button fullWidth type="submit" disabled={processing}>
             {processing ?
               <CircularProgress size={25}/>
               : 'Upload video'}
